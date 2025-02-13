@@ -1,0 +1,36 @@
+
+  services:
+    solace_broker_dev:
+      image: ${SOLACE_DOCKER_IMAGE}
+      container_name: ${BROKER_NAME}
+      user: ${SOLACE_USER_ID}
+      shm_size: ${SHM_SIZE}
+      deploy:
+        restart_policy:
+          condition: on-failure
+          max_attempts: 1
+      ulimits:
+        nofile:
+          soft: 2448
+          hard: 6592
+        core: -1    
+      ports:
+        - "8080:8080"   # Web UI
+        - "1943:1943"   # Custom port for external access (HTTPS)
+        - "55443:9443"  # SMF over TLS
+        - "1443:1443"   # Web Messaging over TLS
+        - "8883:8883"   # MQTT over TLS
+        - "8443:8443"   # MQTT / WebSockets TLS / SSL
+        - "5671:5671"   # AMQP over TLS
+        - "5550:5550"   # health check
+      environment:
+        - username_admin_globalaccesslevel=${USERNAME_ADMIN_GLOBALACCESSLEVEL}
+        - username_admin_passwordfilepath=${USERNAME_ADMIN_PASSWORD_FILE_NAME}
+        - system_scaling_maxconnectioncount=${SYSTEM_SCALING_MAXCONNECTIONCOUNT}
+        - messagespool_maxspoolusage=${MESSAGESPOOL_MAXSPOOLUSAGE}
+        - TZ=America/Santiago
+        - routername=${BROKER_NAME}
+        - tls_servercertificate_filepath=${CERTIFICATE}
+      volumes:
+        - /solace/data:/var/lib/solace:Z
+        - /solace/secrets:/run/secrets

@@ -1,0 +1,58 @@
+services:
+    primary:
+      image: ${SOLACE_DOCKER_IMAGE}
+      container_name: ${BROKER_NAME}
+      user: ${SOLACE_USER_ID}
+      shm_size: ${SHM_SIZE}
+      deploy:
+        restart_policy:
+          condition: on-failure
+          max_attempts: 1
+      ulimits:
+        nofile:
+          soft: 2448
+          hard: 38048
+        core: -1    
+      ports:
+        - "8080:8080"   # Web UI      
+        - "1943:1943"   # Custom port for external access (HTTPS)
+        - "55555:55555"  # SMF
+        - "55443:55443"  # SMF over TLS
+        - "9443:9443"    # REST HTTPS
+        - "1443:1443"   # Web Messaging over TLS
+        - "8883:8883"   # MQTT over TLS
+        - "8443:8443"   # MQTT / WebSockets TLS / SSL
+        - "5671:5671"   # AMQP over TLS
+        - "5550:5550"   # health check
+        - "8741:8741"   # HA mate link
+        - "8300:8300"   # HA sync
+        - "8301:8301"   # HA sync
+        - "8302:8302"   # HA sync
+        - "8301:8301/udp" # HA sync udp
+        - "8302:8302/udp" # HA sync udp
+      environment:
+        - username_admin_globalaccesslevel=${USERNAME_ADMIN_GLOBALACCESSLEVEL}
+        - username_admin_passwordfilepath=${USERNAME_ADMIN_PASSWORD_FILE_NAME}
+        - username_dynatrace-view_globalaccesslevel=${USERNAME_DYNATRACE_GLOBALACCESSLEVEL}
+        - username_dynatrace-view_passwordfilepath=${USERNAME_DYNATRACE_PASSWORD_FILE_NAME}
+        - system_scaling_maxconnectioncount=${SYSTEM_SCALING_MAXCONNECTIONCOUNT}
+        - messagespool_maxspoolusage=${MESSAGESPOOL_MAXSPOOLUSAGE}
+        - redundancy_enable=yes
+        - redundancy_authentication_presharedkey_key=YmFuY29kZWNoaWxlcHJlcHJvZHFhbGxhdmVrZXlzb2xhY2VzdXBlcnNlY3JldDAx
+        - redundancy_group_node_prdprimary_connectvia=lsclprocicmsolace01
+        - redundancy_group_node_prdprimary_nodetype=message_routing
+        - redundancy_group_node_prdbackup_connectvia=lsclprocicmsolace02
+        - redundancy_group_node_prdbackup_nodetype=message_routing
+        - redundancy_group_node_prdmonitoring_connectvia=lsclprocicmsolace03
+        - redundancy_group_node_prdmonitoring_nodetype=monitoring
+        - configsync_enable=yes
+        - redundancy_matelink_connectvia=lsclprocicmsolace02
+        - redundancy_activestandbyrole=primary
+        - service_semp_tlsport=1943        
+        - TZ=America/Santiago
+        - routername=${ROUTER_NAME}
+        - tls_servercertificate_filepath=${CERTIFICATE}
+        - productkey=${PRODUCT_KEY}
+      volumes:
+        - /solace/data:/var/lib/solace:Z
+        - /solace/secrets:/run/secrets
