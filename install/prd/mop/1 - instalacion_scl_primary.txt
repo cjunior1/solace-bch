@@ -20,7 +20,7 @@ Instalar el broker primary
 4) Baixar los archivos para la instalacíon
 
 	cd /solace/install
-	wget http://solace_repo.git/prd/primary/install.zip
+	wget http://solace_repo.git/install/prd/scl/primary/install.zip
 	unzip install.zip
     cd ../secrets
     wget http://solace_repo.git/prd/secrets/secrets.zip
