@@ -1,0 +1,21 @@
+
+Definir Broker lider - broker primary -santiago
+
+
+1) Acceda a la máquina host lsclprocicmsolace01 via ssh
+
+2) Acceda a la consola CLI de Solace
+	 
+	sudo su - opc
+	sudo solace
+	docker exec -it solace_broker_prd_primary cli
+	enable
+	enable# admin
+	(admin)# config-sync
+	(admin/config-sync)# assert leader router
+		responder "y"
+	(admin/config-sync)# assert leader message-vpn *
+		responder "y"
+	(admin/config-sync)# end
+	# exit
+    exit

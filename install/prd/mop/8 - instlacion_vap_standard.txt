@@ -1,0 +1,49 @@
+1) Acceder a la máquina host lvapprocicmsolace01 via ssh
+	
+2) Cambiar al usuário solace
+	
+	sudo su - opc
+	sudo solace
+
+3) Crear subdirectorios en directorio /solace
+	
+	cd /solace
+	mkdir data
+	mkdir install
+	mkdir secrets
+
+4) Baixar los archivos para la instalacíon
+
+	cd /solace/install
+	wget http://solace_repo.git/prd/vap/install.zip
+	unzip install.zip
+    cd /solace/secrets
+    wget http://solace_repo.git/prd/vap/secrets.zip
+	unzip secrets.zip
+
+5) Cambie el ID de usuario en el archivo .env al ID de usuario de Solace
+
+	- obtener userid del usuário solace
+    
+		cat /etc/passwd | grep solace
+        cd /solace/install
+	    nano .env
+		    Cambie el valor de la variable de entorno USERID al ID de usuario de solace.
+		    ex.
+		    USERID=10007
+
+
+6) Subir contenedor del broker standard
+
+	cd /solace/install
+	docker compose -f docker-compose-valparaiso.yml up -d
+
+7) Validar el broker 
+	
+	    Acceda a la consola CLI de Solace y vea el estado de los servicios
+		docker exec -it solace_broker_prd_valparaiso cli
+		enable
+		# show service
+
+
+

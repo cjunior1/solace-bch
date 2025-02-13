@@ -1,0 +1,52 @@
+
+Instalacíon en Santiago
+
+Instalar el broker primary
+
+1) Acceder a la máquina host lsclprocicmsolace01 via ssh
+	
+2) Cambiar al usuário solace
+	
+	sudo su - opc
+	sudo solace
+
+3) Crear subdirectorios en directorio /solace
+	
+	cd /solace
+	mkdir data
+	mkdir install
+	mkdir secrets
+
+4) Baixar los archivos para la instalacíon
+
+	cd /solace/install
+	wget http://solace_repo.git/prd/primary/install.zip
+	unzip install.zip
+    cd ../secrets
+    wget http://solace_repo.git/prd/secrets/secrets.zip
+	unzip secrets.zip
+
+
+5) Cambie el ID de usuario en el archivo .env al ID de usuario de Solace
+
+	- obtener userid del usuário solace
+		cat /etc/passwd | grep solace
+        cd /solace/install
+	    nano .env
+		    Cambie el valor de la variable de entorno USERID al ID de usuario de solace.
+		    ex.
+		    USERID=10007
+
+5) Subir contenedor del broker primary
+
+	cd /solace/install
+	docker compose -f docker-compose-primary.yml up -d
+
+6) Validar el broker 
+	
+	Acceda a la consola CLI de Solace y vea el estado de los servicios
+		docker exec -it solace_broker_prd_primary cli
+		enable
+		enbale# show service
+	
+
