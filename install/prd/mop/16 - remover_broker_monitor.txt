@@ -1,0 +1,14 @@
+Instalacíon en Santiago
+
+Instalar el broker monitor
+
+1) Acceder a la máquina host lsclprocicmsolace03 via ssh
+	
+2) Remover broker monitor
+	
+	sudo su - opc
+	sudo solace
+    docker stop solace_broker_prd_monitor
+    docker rm solace_broker_prd_monitor
+	cd /solace
+	rm -rf data
