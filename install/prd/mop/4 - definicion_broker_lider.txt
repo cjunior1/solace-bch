@@ -1,5 +1,5 @@
 
-Definir Broker lider - broker primary -santiago
+Definir broker líder - broker primary -santiago
 
 
 1) Acceda a la máquina host lsclprocicmsolace01 via ssh
@@ -13,9 +13,9 @@ Definir Broker lider - broker primary -santiago
 	enable# admin
 	(admin)# config-sync
 	(admin/config-sync)# assert leader router
-		responder "y"
+		responde "y"
 	(admin/config-sync)# assert leader message-vpn *
-		responder "y"
+		responde "y"
 	(admin/config-sync)# end
 	# exit
     exit

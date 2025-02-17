@@ -1,17 +1,17 @@
 
-Validar fail-over
+Validar conmutación por error - failover
 
 
-1) Desativar serviços do broker primarry
+1) Deshabilitar los servicios del bróker primary
 	
-	Acessar host lsclprocicmsolace01 via ssh
+	Acceder al host lsclprocicmsolace01 via ssh
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_primary cli
 	enable
 	# configure
 	(configure)# redundancy
-	(configure/redundancy)# release-activy
+	(configure/redundancy)# release-activity
 	(configure/redundancy) end
 	# show message-vpn *
 	  default -> down
@@ -20,8 +20,9 @@ Validar fail-over
 	exit
 
 
-3) Verificar se vpn vpn_bch_prd_cross está ativa no broker backup
-	Acessar host lsclprocicmsolace01 via ssh
+3) Compruebe si la VPN vpn_bch_prd_cross está activa en el broker backup 
+
+	Acceder al host lsclprocicmsolace01 via ssh
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_backup cli
@@ -32,7 +33,7 @@ Validar fail-over
 	# exit
 	exit
 
-3) Ativar serviÇo broker primary
+3) Habilitar el servicio de bróker primary
 
 	Acessar host lsclprocicmsolace01 via ssh 
 	sudo su - opc
@@ -41,7 +42,7 @@ Validar fail-over
 	enable
 	# configure
 	(configure)# redundancy
-	(configure/redundancy)# no release-activy
+	(configure/redundancy)# no release-activity
 	(configure/redundancy)# end
 	# show message-vpn *
 	  default -> down
@@ -49,9 +50,9 @@ Validar fail-over
 	# exit
 	exit
 
-4) Definir broker backup para stand-by
+4) Establecer el broker backup en modo de espera 
 
-	Acessar host lsclprocicmsolace02 via ssh
+	Acceder al host lsclprocicmsolace02 via ssh
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_backup cli
@@ -65,8 +66,9 @@ Validar fail-over
 	# exit
 	exit
 
-5) Verificar servÇo ativo broker primary
-	Acessar host 01 - ssh xxx
+5) Verificar servicio activo en broker primary
+
+	Acceder al host lsclprocicmsolace02 via ssh
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_primary cli

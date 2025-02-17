@@ -1,9 +1,10 @@
 
-Criar VPN VPN_BCH_PRD_CROSS - broker primary
+Crear VPN VPN_BCH_PRD_CROSS - broker primary
 
-1) Acessar host lsclprocicmsolace01 via ssh
+1) Acceder al host lsclprocicmsolace01 via ssh
 
-2) Conectar na solace cli
+2) Conectarse a solace cli
+
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_prd_primay cli
@@ -23,9 +24,9 @@ Criar VPN VPN_BCH_PRD_CROSS - broker primary
 	exit
 
 
-3) Habilitar usuario default
+3) Habilitar usuario default [opcional]
 
-	Acessar host lsclprocicmsolace02 via ssh
+	Acceder al host lsclprocicmsolace02 via ssh
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_prd_backup
