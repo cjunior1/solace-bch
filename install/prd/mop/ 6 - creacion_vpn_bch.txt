@@ -1,12 +1,12 @@
 
-Criar VPN VPN_BCH_PRD_CROSS - broker valparaiso
+Criar VPN VPN_BCH_PRD_CROSS - broker primary
 
-1) Acessar host lvapprocicmsolace01
+1) Acessar host lsclprocicmsolace01 via ssh
 
 2) Conectar na solace cli
 	sudo su - opc
 	sudo su solace
-	docker exec -it solace_broker_prd_valparaiso cli
+	docker exec -it solace_broker_prd_primay cli
 	enable
 	# configure
 	(configure)# create message-vpn VPN_BCH_PRD_CROSS
@@ -14,26 +14,25 @@ Criar VPN VPN_BCH_PRD_CROSS - broker valparaiso
 	(configure/message-vpn)# exit
 	(configure)# message-vpn default
 	(configure/message-vpn)# shutdown
-	(configure/message-vpn)# end
-	# show message-vpn *
+	(configure/message-vpn)# exit
+	(configure)# show message-vpn *
 		default -> down
 		vpn_bch_prd_cross -> up
+	(configure)# end
 	# exit
 	exit
 
 
 3) Habilitar usuario default
 
-	Acessar host 02
+	Acessar host lsclprocicmsolace02 via ssh
 	sudo su - opc
-	sudo solace
-	docker exec -it solace_broker_prd_valparaiso
+	sudo su solace
+	docker exec -it solace_broker_prd_backup
 	enable
-	configure
-	(configure)# message-vpn VPN_BCH_PRD_CROSS 
-	(configure/message-vpn)# exit
+	# configure
 	(configure)# client-username default message-vpn VPN_BCH_PRD_CROSS 
 	(configure/client-username)# no shutdown 
 	(configure/client-username)# show client-username *
 
-### habilitar producer e consumer
+### habilitar producer e consumer no client profile ????

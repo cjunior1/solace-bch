@@ -7,7 +7,7 @@ Definir Broker lider - broker primary -santiago
 2) Acceda a la consola CLI de Solace
 	 
 	sudo su - opc
-	sudo solace
+	sudo su solace
 	docker exec -it solace_broker_prd_primary cli
 	enable
 	enable# admin

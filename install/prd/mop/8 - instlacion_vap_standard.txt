@@ -3,7 +3,7 @@
 2) Cambiar al usuário solace
 	
 	sudo su - opc
-	sudo solace
+	sudo su solace
 
 3) Crear subdirectorios en directorio /solace
 	
@@ -15,11 +15,19 @@
 4) Baixar los archivos para la instalacíon
 
 	cd /solace/install
-	wget http://solace_repo.git/prd/vap/install.zip
+	wget http://solace_repo.git/prd/vap/install_vap.zip
 	unzip install.zip
     cd /solace/secrets
     wget http://solace_repo.git/prd/vap/secrets.zip
 	unzip secrets.zip
+
+5) Mudar as senhas dos usuarios admin e dynatrace
+
+	cd solace/secrets
+	nano passwd -> alterar a senha do usuario admin
+	nano passwd-dynatrace -> alterar a senha do usuario dynatrace
+
+
 
 5) Cambie el ID de usuario en el archivo .env al ID de usuario de Solace
 
@@ -44,6 +52,8 @@
 		docker exec -it solace_broker_prd_valparaiso cli
 		enable
 		# show service
-
+			todos servicos devem estar "Enabled"
+		# exit
+		exit
 
 

@@ -1,7 +1,7 @@
 
 Validar  config-sync e redundancia (HA) - Santiago
 
-1) Acessar host 01
+1) Acessar host lsclprocicmsolace01
 
 2) Conectar na solace cli
 
@@ -19,35 +19,40 @@ Validar  config-sync e redundancia (HA) - Santiago
 
 Validar  config-sync e redundancia (HA) - broker backup
 
-1) Acessar host 02
+1) Acessar host lsclprocicmsolace02 via ssh
 
 2) Conectar na solace cli
 
 	sudo su - opc
-	sudo solace
+	sudo su solace
 	docker exec -it solace_broker_prd_backup cli
 	enable
 	# show redundancy group
+		todos devem estar "On-line"
 	# show redundancy detail
+
 	# show config-sync
-	end
+
+	# end
+	# exit
 	exit
 
 ########
 
 Validar  config-sync e redundancia (HA) - broker monitor
 
-1) Acessar host 03
+1) Acessar host lsclprocicmsolace03
 
 2) Conectar na solace cli
 
 	sudo su - opc
-	sudo solace
+	sudo su solace
 	docker exec -it solace_broker_prd_monitor cli
 	enable
 	# show redundancy group
 	# show redundancy detail
-	end
+	# end
+	# exit
 	exit
 
 

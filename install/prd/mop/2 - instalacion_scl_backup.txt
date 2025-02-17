@@ -20,11 +20,18 @@ Instalar el broker backup
 4) Baixar los archivos para la instalacíon
 
 	cd /solace/install
-	wget http://solace_repo.git/prd/backup/install.zip
-	unzip install.zip
+	wget http://solace_repo.git/prd/backup/install_backup.zip
+	unzip install_backup.zip
     cd /solace/secrets
     wget http://solace_repo.git/prd/secrets/secrets.zip
 	unzip secrets.zip
+
+	
+5) Mudar as senhas dos usuarios admin e dynatrace
+
+	cd solace/secrets
+	nano passwd -> alterar a senha do usuario admin
+	nano passwd-dynatrace -> alterar a senha do usuario dynatrace
 
 
 5) Cambie el ID de usuario en el archivo .env al ID de usuario de Solace
@@ -48,5 +55,5 @@ Instalar el broker backup
 		docker exec -it solace_broker_prd_backup cli
 		enable
 		enbale# show service
-	
+			confirmar que todos serviços estão "Enabled"
 

@@ -20,14 +20,19 @@ Instalar el broker primary
 4) Baixar los archivos para la instalacíon
 
 	cd /solace/install
-	wget http://solace_repo.git/install/prd/scl/primary/install.zip
-	unzip install.zip
+	wget http://solace_repo.git/install/prd/scl/primary/install_primary.zip
+	unzip install_primary.zip
     cd ../secrets
     wget http://solace_repo.git/prd/secrets/secrets.zip
 	unzip secrets.zip
 
+5) Mudar as senhas dos usuarios admin e dynatrace
 
-5) Cambie el ID de usuario en el archivo .env al ID de usuario de Solace
+	cd solace/secrets
+	nano passwd -> alterar a senha do usuario admin
+	nano passwd-dynatrace -> alterar a senha do usuario dynatrace
+
+6) Cambie el ID de usuario en el archivo .env al ID de usuario de Solace
 
 	- obtener userid del usuário solace
 		cat /etc/passwd | grep solace
@@ -37,16 +42,19 @@ Instalar el broker primary
 		    ex.
 		    USERID=10007
 
-5) Subir contenedor del broker primary
+7) Subir contenedor del broker primary
 
 	cd /solace/install
 	docker compose -f docker-compose-primary.yml up -d
 
-6) Validar el broker 
+8) Validar el broker 
 	
 	Acceda a la consola CLI de Solace y vea el estado de los servicios
 		docker exec -it solace_broker_prd_primary cli
 		enable
-		enbale# show service
-	
+		# show service
+			- os servicços deverão estar com status de enabled
+		# exit
+		exit
+			
 
