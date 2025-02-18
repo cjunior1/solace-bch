@@ -7,19 +7,15 @@ Instalar el broker backup
 
 	ssh <usuario>@sop_solaceprod@10.111.80.163@psmp.int.bch.bancodechile.cl
 	
-2) Cambiar al usuário solace
+2) Cambiar al usuário solace y crear directórios
 	
 	sudo su - opc
 	sudo su solace
+	mkdir /solace/data
+	mkdir /solace/install
+	mkdir /solace/secrets
 
-3) Crear subdirectorios en directorio /solace
-	
-	cd /solace
-	mkdir data
-	mkdir install
-	mkdir secrets
-
-4) Descargue los archivos para la instalación
+3) Descargue los archivos para la instalación
 
 	cd /solace/install
 	wget http://<solace_repo>.git/prd/backup/install_backup.zip
@@ -27,9 +23,16 @@ Instalar el broker backup
     cd /solace/secrets
     wget http://<solace_repo>.git/prd/secrets/secrets.zip
 	unzip secrets.zip
+	ls -l /solace/secrets
+		-rw-rw-r--. 1 solace solace 7496 Feb 12 16:15 cert_eventbroker-bch-bancodechilefull.pem
+		-rw-rw-r--. 1 solace solace 7496 Feb 12 16:13 cert_eventbroker-scl-bancodechilefull.pem
+		-rw-rw-r--. 1 solace solace 1952 Feb 17 14:18 fw-bch-lgvl_intermedio.crt
+		-rw-rw-r--. 1 solace solace   10 Feb  7 12:44 passwd
+		-rw-rw-r--. 1 solace solace   15 Feb  7 12:44 passwd-dynatrace
+		-rw-rw-r--. 1 solace solace 1346 Feb 17 13:38 root_SCL.cer
 
 	
-5) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]
+4) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]
 
 	cd solace/secrets
 	nano passwd -> alterar a senha do usuario admin
@@ -46,14 +49,14 @@ Instalar el broker backup
 		    ex.
 		    USERID=10007
 
-5) Subir contenedor del broker backup
+6) Subir contenedor del broker backup
 
 	cd /solace/install
 	docker compose -f docker-compose-backup.yml up -d
 	docekr ps
 		- el contenedor debe estar en status = "Up"
 
-6) Validar el broker 
+7) Validar el broker 
 	
 	Acceda a la consola CLI de Solace y vea el estado de los servicios
 		docker exec -it solace_broker_prd_backup cli

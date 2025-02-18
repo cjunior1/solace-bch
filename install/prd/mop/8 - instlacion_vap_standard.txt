@@ -18,6 +18,13 @@
     cd /solace/secrets
     wget http://<solace_repo>.git/prd/vap/secrets.zip
 	unzip secrets.zip
+	ls -l /solace/secrets
+		-rw-rw-r--. 1 solace solace 7496 Feb 12 16:15 cert_eventbroker-bch-bancodechilefull.pem
+		-rw-rw-r--. 1 solace solace 7496 Feb 12 16:13 cert_eventbroker-scl-bancodechilefull.pem
+		-rw-rw-r--. 1 solace solace 1952 Feb 17 14:18 fw-bch-lgvl_intermedio.crt
+		-rw-rw-r--. 1 solace solace   10 Feb  7 12:44 passwd
+		-rw-rw-r--. 1 solace solace   15 Feb  7 12:44 passwd-dynatrace
+		-rw-rw-r--. 1 solace solace 1346 Feb 17 13:38 root_SCL.cer	
 
 4) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]
 
@@ -44,7 +51,7 @@
 	docekr ps
 		- el contenedor debe estar en status = "Up"
 
-8) Validar el broker 
+7) Validar el broker 
 	
 	Acceda a la consola CLI de Solace y vea el estado de los servicios
 		docker exec -it solace_broker_prd_valparaiso cli

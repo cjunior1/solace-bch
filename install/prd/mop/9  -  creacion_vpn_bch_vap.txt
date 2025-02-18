@@ -38,7 +38,7 @@ Crear VPN VPN_BCH_PRD_CROSS - broker valparaiso
 
 3) Habilitar usuario default
 
-	Acessar host 02
+	Acessar host lvapprocicmsolace01
 	sudo su - opc
 	sudo solace
 	docker exec -it solace_broker_prd_valparaiso
