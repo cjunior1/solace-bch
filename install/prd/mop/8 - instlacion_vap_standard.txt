@@ -13,10 +13,10 @@
 3) Descargue los archivos para la instalación
 
 	cd /solace/install
-	wget http://solace_repo.git/prd/vap/install_vap.zip
+	wget http://<solace_repo>.git/prd/vap/install_vap.zip
 	unzip install.zip
     cd /solace/secrets
-    wget http://solace_repo.git/prd/vap/secrets.zip
+    wget http://<solace_repo>.git/prd/vap/secrets.zip
 	unzip secrets.zip
 
 4) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]
@@ -41,6 +41,8 @@
 
 	cd /solace/install
 	docker compose -f docker-compose-valparaiso.yml up -d
+	docekr ps
+		- el contenedor debe estar en status = "Up"
 
 8) Validar el broker 
 	

@@ -17,10 +17,10 @@
 4) Descargue los archivos para la instalación
 
 	cd /solace/install
-	wget http://solace_repo.git/prd/monitor/install_monitor.zip
+	wget http://<solace_repo>.git/prd/monitor/install_monitor.zip
 	unzip install.zip
     cd /solace/secrets
-    wget http://solace_repo.git/prd/secrets.zip
+    wget http://<solace_repo>.git/prd/secrets.zip
 	unzip secrets.zip
 
 

@@ -20,10 +20,10 @@ Instalar el broker primary
 3) Descargue los archivos para la instalación
 
 	cd /solace/install
-	wget http://solace_repo.git/install/prd/scl/primary/install_primary.zip
+	wget http://<solace_repo>.git/install/prd/scl/primary/install_primary.zip
 	unzip install_primary.zip
     cd /solace/secrets
-    wget http://solace_repo.git/prd/secrets/secrets.zip
+    wget http://<solace_repo>.git/prd/secrets/secrets.zip
 	unzip secrets.zip
 
 4) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]

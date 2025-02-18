@@ -22,10 +22,10 @@ Instalar el broker backup
 4) Descargue los archivos para la instalación
 
 	cd /solace/install
-	wget http://solace_repo.git/prd/backup/install_backup.zip
+	wget http://<solace_repo>.git/prd/backup/install_backup.zip
 	unzip install_backup.zip
     cd /solace/secrets
-    wget http://solace_repo.git/prd/secrets/secrets.zip
+    wget http://<solace_repo>.git/prd/secrets/secrets.zip
 	unzip secrets.zip
 
 	
