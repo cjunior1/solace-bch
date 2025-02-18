@@ -25,18 +25,44 @@
     (.../dynamic-message-routing/cluster/link)# connect-via eventbroker.ociprdvap.bancodechile.cl:55443
     (.../dynamic-message-routing/cluster/link)# transport ssl 
     (.../dynamic-message-routing/cluster/link)# no shutdown 
-    (.../dynamic-message-routing/cluster/link)# exit
-    (...uting/dynamic-message-routing/cluster)# show cluster * link *
-
-        Cluster Name          : CLUSTER_BCH_PRD_CROSS
-        Node Name             : prdprimary
-        Link                               Admin Oper  Fail Reason / Uptime
-        ---------------------------------- ----- ----- ----------------------------
-        #ACTIVE                            Up    Up    0d 0h 4m 22s
-        prdvalparaiso                      Up    Down  Channel(s) Down
-
-    (...uting/dynamic-message-routing/cluster)# end
+    (.../dynamic-message-routing/cluster/link)# end
     # exit
     exit
 
 3) Crear DMR Bridge na VPN_BCH_PRD_CROSS
+    
+    docker exec -it solace_broker_prd_primary cli
+    enable
+    # configure
+    (configure)# message-vpn VPN_BCH_PRD_CROSS 
+    (configure/message-vpn)# dynamic-message-routing 
+    (...e/message-vpn/dynamic-message-routing)# no shutdown 
+    (...e/message-vpn/dynamic-message-routing)# create dmr-bridge prdvalparaiso
+    (...pn/dynamic-message-routing/dmr-bridge)# remote message-vpn VPN_BCH_PRD_CROSS
+    (...pn/dynamic-message-routing/dmr-bridge)# end
+    # show bridge *
+
+        Total # Bridges    :           1 of    50
+        # Local Bridges  :           1 of    25
+        # Remote Bridges :           0 of    25
+        Total # with Connect-Via :     0 of    25
+
+        Total Bridge Subscriptions : 1 of 20000
+
+        Flags Legend:
+        A - Admin State (U=Up, D=Down, -=not-applicable)
+        E - Connection Establisher (L=Local, R=Remote, -=not-applicable)
+        I - Inbound Oper State (U=Up, D=Down, -=not-applicable)
+        O - Outbound Oper State (U=Up, D=Down, -=not-applicable)
+        Q - Queue State (U=Up, D=Down, -=not-applicable)
+        R - Redundancy Type (P=Primary, B=Backup, A=Auto -=not-applicable)
+                    Local       Remote      Remote          Status
+        Name         MsgVpn      MsgVpn      Router        A E I O Q R   Uptime
+        ------------ ----------- ----------- ------------- ----------- --------------
+        #cluster:prd #cluster    #cluster    v:prdvalparai U L U U - P        11m 36s
+        valparaiso                           so                                    
+    
+    # exit
+    exit
+
+
