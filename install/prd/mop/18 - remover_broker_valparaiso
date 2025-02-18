@@ -1,8 +1,8 @@
 Instalacíon en VAlparaiso
 
-Instalar el broker valparaiso
-
-1) Acceder a la máquina host XXX via ssh
+1) Acceder a la máquina host lvapprocicmsolace01 via ssh
+	
+	ssh <usuario>@sop_solaceprod@10.124.80.131@psmp.int.bch.bancodechile.cl
 	
 2) Remover broker valparaiso
 	

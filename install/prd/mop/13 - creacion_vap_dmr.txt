@@ -50,7 +50,7 @@
     (configure)# message-vpn VPN_BCH_PRD_CROSS 
     (configure/message-vpn)# dynamic-message-routing 
     (...e/message-vpn/dynamic-message-routing)# no shutdown 
-    (...e/message-vpn/dynamic-message-routing)# create dmr-bridge prdvalparaiso
+    (...e/message-vpn/dynamic-message-routing)# create dmr-bridge prdprimary
     (...pn/dynamic-message-routing/dmr-bridge)# remote message-vpn VPN_BCH_PRD_CROSS
     (...pn/dynamic-message-routing/dmr-bridge)# end
     # show bridge *

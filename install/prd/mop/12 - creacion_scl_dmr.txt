@@ -11,7 +11,7 @@
     enable
     # configure
     (configure)# routing dynamic-message-routing
-    (...igure/routing/dynamic-message-routing)# create cluster CLUSTER_BCH_PRD_CROSS
+    (...igure/routing/dynamic-message-routing)# create cluster CLUSTER_BCH_PRD_CROSS_SCL
     (...uting/dynamic-message-routing/cluster)# authentication 
     (...essage-routing/cluster/authentication)# basic
     (...-routing/cluster/authentication/basic)# password solace123
@@ -34,7 +34,7 @@
     docker exec -it solace_broker_prd_primary cli
     enable
     # configure
-    (configure)# message-vpn VPN_BCH_PRD_CROSS 
+    (configure)# message-vpn VPN_BCH_PRD_CROSS_VAP
     (configure/message-vpn)# dynamic-message-routing 
     (...e/message-vpn/dynamic-message-routing)# no shutdown 
     (...e/message-vpn/dynamic-message-routing)# create dmr-bridge prdvalparaiso

@@ -3,6 +3,8 @@ Instalacíon en Santiago
 Instalar el broker monitor
 
 1) Acceder a la máquina host lsclprocicmsolace03 via ssh
+
+	ssh <usuario>@sop_solaceprod@10.111.80.169@psmp.int.bch.bancodechile.cl
 	
 2) Remover broker monitor
 	

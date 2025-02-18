@@ -8,7 +8,7 @@
 	sudo su - opc
 	sudo su solace
 
-3) Copiar certificados root e intermedio para broker Solace
+3) Copiar certificados raíz e intermedios al broker Solace
 
     cd /solace/secrets
     cp root_SCL.cer /solace/data/jail/certs 
@@ -49,7 +49,7 @@
 	sudo su - opc
 	sudo su solace
 
-6) Copiar certificados root e intermedio para broker Solace
+6) Copiar certificados raíz e intermedios al broker Solace
 
     cd /solace/secrets
     cp root_SCL.cer /solace/data/jail/certs 

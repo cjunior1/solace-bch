@@ -10,7 +10,7 @@
 	mkdir install
 	mkdir secrets
 
-3) Baixar los archivos para la instalacíon
+3) Descargue los archivos para la instalación
 
 	cd /solace/install
 	wget http://solace_repo.git/prd/vap/install_vap.zip

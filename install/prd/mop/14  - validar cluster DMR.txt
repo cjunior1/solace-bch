@@ -8,13 +8,39 @@
     enable
     # show cluster * link *
 
-        Cluster Name          : CLUSTER_BCH_PRD_CROSS
+        Cluster Name          : CLUSTER_BCH_PRD_CROSS_SCL
         Node Name             : prdprimary
         Link                               Admin Oper  Fail Reason / Uptime
         ---------------------------------- ----- ----- ----------------------------
         #ACTIVE                            Up    Up    0d 0h 3m 13s
         prdvalparaiso                      Up    Up    0d 0h 0m 10s
 
+    # show bridge * 
+
+        Total # Bridges    :           2 of    50
+        # Local Bridges  :           2 of    25
+        # Remote Bridges :           0 of    25
+        Total # with Connect-Via :     0 of    25
+
+        Total Bridge Subscriptions : 1 of 20000
+
+        Flags Legend:
+        A - Admin State (U=Up, D=Down, -=not-applicable)
+        E - Connection Establisher (L=Local, R=Remote, -=not-applicable)
+        I - Inbound Oper State (U=Up, D=Down, -=not-applicable)
+        O - Outbound Oper State (U=Up, D=Down, -=not-applicable)
+        Q - Queue State (U=Up, D=Down, -=not-applicable)
+        R - Redundancy Type (P=Primary, B=Backup, A=Auto -=not-applicable)
+                    Local       Remote      Remote          Status
+        Name         MsgVpn      MsgVpn      Router        A E I O Q R   Uptime
+        ------------ ----------- ----------- ------------- ----------- --------------
+        #cluster:676 VPN_BCH_PRD VPN_BCH_PRD v:prdvalparai U L U U U P         3m 42s
+        e4fe7db9d0   _CROSS      _CROSS      so                                    
+        00a67b4778                                                                 
+        200000002                                                                  
+        #cluster:prd #cluster    #cluster    v:prdvalparai U L U U - P         4m 43s
+        valparaiso                           so                   
+    
     # exit
     exit
 
@@ -27,12 +53,40 @@
     enable
     # show cluster * link *
 
-        Cluster Name          : CLUSTER_BCH_PRD_CROSS
+        Cluster Name          : CLUSTER_BCH_PRD_CROSS_VAP
         Node Name             : prdprimary
         Link                               Admin Oper  Fail Reason / Uptime
         ---------------------------------- ----- ----- ----------------------------
         #ACTIVE                            Up    Up    0d 0h 3m 13s
         prdvalparaiso                      Up    Up    0d 0h 0m 10s
+    
+    # show brdige *
 
+        Total # Bridges    :           4 of    50
+        # Local Bridges  :           2 of    25
+        # Remote Bridges :           2 of    25
+        Total # with Connect-Via :     0 of    25
+
+        Total Bridge Subscriptions : 1 of 20000
+
+        Flags Legend:
+        ---Press any key to continue, or `q' to quit---
+        A - Admin State (U=Up, D=Down, -=not-applicable)
+        E - Connection Establisher (L=Local, R=Remote, -=not-applicable)
+        I - Inbound Oper State (U=Up, D=Down, -=not-applicable)
+        O - Outbound Oper State (U=Up, D=Down, -=not-applicable)
+        Q - Queue State (U=Up, D=Down, -=not-applicable)
+        R - Redundancy Type (P=Primary, B=Backup, A=Auto -=not-applicable)
+                    Local       Remote      Remote          Status
+        Name         MsgVpn      MsgVpn      Router        A E I O Q R   Uptime
+        ------------ ----------- ----------- ------------- ----------- --------------
+        ---Press any key to continue, or `q' to quit---
+        #cluster:81a VPN_BCH_PRD VPN_BCH_PRD v:prdprimary  U L U U U P            30s
+        c5af6a5a30   _CROSS      _CROSS                                            
+        00a67b47cb                                                                 
+        200000002                                                                  
+        #cluster:prd #cluster    #cluster    v:prdprimary  U L U U - P         1m 35s
+        primary                                               
+   
     # exit
     exit

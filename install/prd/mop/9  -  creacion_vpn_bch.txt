@@ -1,11 +1,11 @@
 
-Criar VPN VPN_BCH_PRD_CROSS - broker valparaiso
+Crear VPN VPN_BCH_PRD_CROSS - broker valparaiso
 
-1) Acessar host lvapprocicmsolace01 via host
+1) Acceder al host lvapprocicmsolace01 via ssh
 
 	ssh <usuario>@sop_solaceprod@10.124.80.131@psmp.int.bch.bancodechile.cl
 
-2) Conectar na solace cli
+2) Crear VPN
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_prd_valparaiso cli

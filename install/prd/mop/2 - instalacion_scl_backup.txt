@@ -19,7 +19,7 @@ Instalar el broker backup
 	mkdir install
 	mkdir secrets
 
-4) Baixar los archivos para la instalacíon
+4) Descargue los archivos para la instalación
 
 	cd /solace/install
 	wget http://solace_repo.git/prd/backup/install_backup.zip
@@ -29,7 +29,7 @@ Instalar el broker backup
 	unzip secrets.zip
 
 	
-5) Mudar as senhas dos usuarios admin e dynatrace
+5) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]
 
 	cd solace/secrets
 	nano passwd -> alterar a senha do usuario admin
