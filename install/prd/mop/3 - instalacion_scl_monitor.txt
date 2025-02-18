@@ -1,9 +1,11 @@
 1) Acceder a la máquina host lsclprocicmsolace03 via ssh
-	
+
+	ssh <usuario>@sop_solaceprod@10.111.80.169@psmp.int.bch.bancodechile.cl
+
 2) Cambiar al usuário solace
 	
 	sudo su - opc
-	sudo solace
+	sudo su solace
 
 3) Crear subdirectorios en directorio /solace
 	
@@ -44,13 +46,20 @@
 
 	cd /solace/install
 	docker compose -f docker-compose-monitor.yml up -d
+	docekr ps
+		- el contenedor debe estar en status = "Up"
 
 7) Validar el broker 
 	
 	    Acceda a la consola CLI de Solace y vea el estado de los servicios
 		docker exec -it solace_broker_prd_monitor cli
+
+		Operating Mode: Monitoring Node
 		enable
 		# show service
-			confimar que todos serviços estão "Enabled"
+				- los servicios deben tener el estado habilitado "Shutdown"
+				- servicio Redundancy debe estar "Enabled"
+		# exit
+		exit
 
 

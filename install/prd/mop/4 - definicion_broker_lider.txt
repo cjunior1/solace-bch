@@ -4,6 +4,8 @@ Definir broker líder - broker primary -santiago
 
 1) Acceda a la máquina host lsclprocicmsolace01 via ssh
 
+	ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
+
 2) Acceda a la consola CLI de Solace
 	 
 	sudo su - opc
@@ -12,9 +14,9 @@ Definir broker líder - broker primary -santiago
 	enable
 	enable# admin
 	(admin)# config-sync
-	(admin/config-sync)# assert leader router
+	(admin/config-sync)# assert-leader router
 		responde "y"
-	(admin/config-sync)# assert leader message-vpn *
+	(admin/config-sync)# assert-leader message-vpn *
 		responde "y"
 	(admin/config-sync)# end
 	# exit

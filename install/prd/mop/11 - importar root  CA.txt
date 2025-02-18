@@ -1,0 +1,81 @@
+
+1) Acceder a la máquina host lsclprocicmsolace01 via ssh
+	
+	ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
+	
+2) Cambiar al usuário solace 
+	
+	sudo su - opc
+	sudo su solace
+
+3) Copiar certificados root e intermedio para broker Solace
+
+    cd /solace/secrets
+    cp root_SCL.cer /solace/data/jail/certs 
+    cp fw-bch-lgvl_intermedio.crt /solace/data/jail/certs/
+
+3) Configurar domain authorities - CA
+
+    docker exec -it solace_broker_bch_primary cli
+    enable
+    # configure
+    (configure)# ssl
+    (configure/ssl)# create domain-certificate-authority root_SCL
+    (...gure/ssl/domain-certificate-authority)# certificate file root_SCL.cer
+    (...gure/ssl/domain-certificate-authority)# exit
+    (configure/ssl)# create domain-certificate-authority fw-bch-lgvl_intermedio
+    (...gure/ssl/domain-certificate-authority)# certificate file fw-bch-lgvl_intermedio.crt 
+    (...gure/ssl/domain-certificate-authority)# exit
+    (configure/ssl)# show domain-certificate-authority ca-name *
+
+        Domain Certificate Authority                              Certificate Configured
+        ======================================================    ======================
+        fw-bch-lgvl_intermedio                                       Yes
+        root_SCL                                                     Yes
+    
+    (configure/ssl)# end
+    # exit
+    exit
+
+
+##### Valparaiso
+
+4) Acceder a la máquina host lvapprocicmsolace01 via ssh
+	
+	ssh <usuario>@sop_solaceprod@10.124.80.131@psmp.int.bch.bancodechile.cl
+	
+5) Cambiar al usuário solace 
+	
+	sudo su - opc
+	sudo su solace
+
+6) Copiar certificados root e intermedio para broker Solace
+
+    cd /solace/secrets
+    cp root_SCL.cer /solace/data/jail/certs 
+    cp fw-bch-lgvl_intermedio.crt /solace/data/jail/certs/
+
+7) Configurar domain authorities - CA
+
+    docker exec -it solace_broker_bch_valparaiso cli
+    enable
+    # configure
+    (configure)# ssl
+    (configure/ssl)# create domain-certificate-authority root_SCL
+    (...gure/ssl/domain-certificate-authority)# certificate file root_SCL.cer
+    (...gure/ssl/domain-certificate-authority)# exit
+    (configure/ssl)# create domain-certificate-authority fw-bch-lgvl_intermedio
+    (...gure/ssl/domain-certificate-authority)# certificate file fw-bch-lgvl_intermedio.crt 
+    (...gure/ssl/domain-certificate-authority)# exit
+    (configure/ssl)# show domain-certificate-authority ca-name *
+
+        Domain Certificate Authority                              Certificate Configured
+        ======================================================    ======================
+        fw-bch-lgvl_intermedio                                       Yes
+        root_SCL                                                     Yes
+    
+    (configure/ssl)# end
+    # exit
+    exit
+
+

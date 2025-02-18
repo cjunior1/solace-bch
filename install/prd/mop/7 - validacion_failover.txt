@@ -5,6 +5,8 @@ Validar conmutación por error - failover
 1) Deshabilitar los servicios del bróker primary
 	
 	Acceder al host lsclprocicmsolace01 via ssh
+		ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
+
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_primary cli
@@ -12,30 +14,47 @@ Validar conmutación por error - failover
 	# configure
 	(configure)# redundancy
 	(configure/redundancy)# release-activity
-	(configure/redundancy) end
-	# show message-vpn *
-	  default -> down
-	  vpn_bch_prd_cross -> down
+	(configure/redundancy) show message-vpn *
+
+		Management Message VPN: 
+		Message-VPN                      Local       # Unique Subscriptions  # Local
+										Status      Local   Remote    Total   Conns
+		-------------------------------- -------- -------- -------- -------- -------
+		#config-sync                     Down           23        0       23       1
+		VPN_BCH_PRD_CROSS                Down            4        0        4       1
+		default                          Down           12        0       12       0
+
 	# exit
 	exit
 
 
 3) Compruebe si la VPN vpn_bch_prd_cross está activa en el broker backup 
 
-	Acceder al host lsclprocicmsolace01 via ssh
+	Acceder al host lsclprocicmsolace02 via ssh
+		ssh <usuario>@sop_solaceprod@10.111.80.63@psmp.int.bch.bancodechile.cl
+
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_backup cli
 	enable
 	# show message-vpn *
-		default -> down
-		vpn_bch_prd_cross -> UP
+
+		Management Message VPN: 
+		Message-VPN                      Local       # Unique Subscriptions  # Local
+										Status      Local   Remote    Total   Conns
+		-------------------------------- -------- -------- -------- -------- -------
+		#config-sync                     Up             27        0       27       3
+		VPN_BCH_PRD_CROSS                Up              6        0        6       1
+		default                          Down           12        0       12       0
+
 	# exit
 	exit
 
 3) Habilitar el servicio de bróker primary
 
 	Acessar host lsclprocicmsolace01 via ssh 
+		ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
+
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_primary cli
@@ -44,37 +63,51 @@ Validar conmutación por error - failover
 	(configure)# redundancy
 	(configure/redundancy)# no release-activity
 	(configure/redundancy)# end
-	# show message-vpn *
-	  default -> down
-	  vpn_bch_prd_cross -> down
 	# exit
 	exit
 
 4) Establecer el broker backup en modo de espera 
 
 	Acceder al host lsclprocicmsolace02 via ssh
+		ssh <usuario>@sop_solaceprod@10.111.80.163@psmp.int.bch.bancodechile.cl
+
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_backup cli
 	enable
 	# admin
 	(#admin) redundacy revert-activity
-	(#admin/redundancy) end
-	# show message-vpn *
-		default -> down
-		vpn_bch_prd_cross -> down
+	(#admin/redundancy) show message-vpn *
+
+		Management Message VPN: 
+		Message-VPN                      Local       # Unique Subscriptions  # Local
+										Status      Local   Remote    Total   Conns
+		-------------------------------- -------- -------- -------- -------- -------
+		#config-sync                     Down           23        0       23       1
+		VPN_BCH_PRD_CROSS                Down            4        0        4       1
+		default                          Down           12        0       12       0
+
 	# exit
 	exit
 
 5) Verificar servicio activo en broker primary
 
-	Acceder al host lsclprocicmsolace02 via ssh
+	Acceder al host lsclprocicmsolace01 via ssh
+		ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
+
 	sudo su - opc
 	sudo su solace
 	docker exec -it solace_broker_bch_primary cli
 	enable
 	# show message-vpn *
-		default -> down
-		vpn_bch_prd_cross -> UP
+
+		Management Message VPN: 
+		Message-VPN                      Local       # Unique Subscriptions  # Local
+										Status      Local   Remote    Total   Conns
+		-------------------------------- -------- -------- -------- -------- -------
+		#config-sync                     Up             27        0       27       3
+		VPN_BCH_PRD_CROSS                Up              6        0        6       1
+		default                          Down           12        0       12       0
+
 	# exit
 	exit 

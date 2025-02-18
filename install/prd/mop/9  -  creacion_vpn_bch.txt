@@ -1,13 +1,14 @@
 
-Crear VPN VPN_BCH_PRD_CROSS - broker primary
+Criar VPN VPN_BCH_PRD_CROSS - broker valparaiso
 
-1) Acceder al host lsclprocicmsolace01 via ssh
+1) Acessar host lvapprocicmsolace01 via host
 
-2) Conectarse a solace cli
+	ssh <usuario>@sop_solaceprod@10.124.80.131@psmp.int.bch.bancodechile.cl
 
+2) Conectar na solace cli
 	sudo su - opc
 	sudo su solace
-	docker exec -it solace_broker_prd_primay cli
+	docker exec -it solace_broker_prd_valparaiso cli
 	enable
 	# configure
 	(configure)# create message-vpn VPN_BCH_PRD_CROSS
@@ -16,10 +17,6 @@ Crear VPN VPN_BCH_PRD_CROSS - broker primary
 	(configure)# message-spool message-vpn VPN_BCH_PRD_CROSS
 	(configure/message-spool)# max-spool-usage 200000
 	(configure/message-spool)# exit
-
-		(configure)# jndi
-		(configure/jndi)# no shutdown
-
 	(configure)# message-vpn default
 	(configure/message-vpn)# shutdown
 		responde "y"
@@ -30,25 +27,28 @@ Crear VPN VPN_BCH_PRD_CROSS - broker primary
 		Message-VPN                      Local       # Unique Subscriptions  # Local
 										Status      Local   Remote    Total   Conns
 		-------------------------------- -------- -------- -------- -------- -------
-		#config-sync                     Up             24        0       24       3
 		VPN_BCH_PRD_CROSS                Up              6        0        6       1
-		default                          Down           12        0       12       0
+		default                          Down            6        0        6       0
 
 	(configure)# end
 	# exit
 	exit
 
 
-3) Habilitar usuario default [opcional]
 
-	Acceder al host lsclprocicmsolace02 via ssh
+3) Habilitar usuario default
+
+	Acessar host 02
 	sudo su - opc
-	sudo su solace
-	docker exec -it solace_broker_prd_backup
+	sudo solace
+	docker exec -it solace_broker_prd_valparaiso
 	enable
-	# configure
+	configure
+	(configure)# message-vpn VPN_BCH_PRD_CROSS
+	(configure/message-vpn)# max-spool-usage 200000
+	(configure/message-vpn)# exit
 	(configure)# client-username default message-vpn VPN_BCH_PRD_CROSS 
 	(configure/client-username)# no shutdown 
 	(configure/client-username)# show client-username *
 
-### habilitar producer e consumer no client profile ????
+### habilitar producer e consumer

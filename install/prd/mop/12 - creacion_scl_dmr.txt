@@ -1,0 +1,42 @@
+
+1) Acceder a la máquina host lsclprocicmsolace01 via ssh
+	
+	ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
+    sudo su - opc
+    sudo su solace
+
+2) Crear Cluster CLUSTER_BCH_PRD_CROSS y link para Valparaiso
+
+    docker exec -it solace_broker_prd_primary cli
+    enable
+    # configure
+    (configure)# routing dynamic-message-routing
+    (...igure/routing/dynamic-message-routing)# create cluster CLUSTER_BCH_PRD_CROSS
+    (...uting/dynamic-message-routing/cluster)# authentication 
+    (...essage-routing/cluster/authentication)# basic
+    (...-routing/cluster/authentication/basic)# password solace123
+    (...-routing/cluster/authentication/basic)# no shutdown 
+    (...-routing/cluster/authentication/basic)# exit
+    (...essage-routing/cluster/authentication)# exit
+    (...uting/dynamic-message-routing/cluster)# no shutdown 
+    (...uting/dynamic-message-routing/cluster)# create link prdvalparaiso
+    (.../dynamic-message-routing/cluster/link)# span external 
+    (.../dynamic-message-routing/cluster/link)# initiator local 
+    (.../dynamic-message-routing/cluster/link)# connect-via eventbroker.ociprdvap.bancodechile.cl:55443
+    (.../dynamic-message-routing/cluster/link)# transport ssl 
+    (.../dynamic-message-routing/cluster/link)# no shutdown 
+    (.../dynamic-message-routing/cluster/link)# exit
+    (...uting/dynamic-message-routing/cluster)# show cluster * link *
+
+        Cluster Name          : CLUSTER_BCH_PRD_CROSS
+        Node Name             : prdprimary
+        Link                               Admin Oper  Fail Reason / Uptime
+        ---------------------------------- ----- ----- ----------------------------
+        #ACTIVE                            Up    Up    0d 0h 4m 22s
+        prdvalparaiso                      Up    Down  Channel(s) Down
+
+    (...uting/dynamic-message-routing/cluster)# end
+    # exit
+    exit
+
+3) Crear DMR Bridge na VPN_BCH_PRD_CROSS

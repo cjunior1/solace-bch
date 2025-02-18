@@ -4,11 +4,13 @@ Instalacíon en Santiago
 Instalar el broker backup
 
 1) Acceder a la máquina host lsclprocicmsolace02 via ssh
+
+	ssh <usuario>@sop_solaceprod@10.111.80.163@psmp.int.bch.bancodechile.cl
 	
 2) Cambiar al usuário solace
 	
 	sudo su - opc
-	sudo solace
+	sudo su solace
 
 3) Crear subdirectorios en directorio /solace
 	
@@ -48,12 +50,18 @@ Instalar el broker backup
 
 	cd /solace/install
 	docker compose -f docker-compose-backup.yml up -d
+	docekr ps
+		- el contenedor debe estar en status = "Up"
 
 6) Validar el broker 
 	
 	Acceda a la consola CLI de Solace y vea el estado de los servicios
 		docker exec -it solace_broker_prd_backup cli
+
+		Operationg Mode: Message Routing Node
 		enable
-		enbale# show service
-			confirmar que todos serviços estão "Enabled"
+		# show service
+				- los servicios deben tener el estado habilitado "Enabled"
+		# exit
+		exit
 

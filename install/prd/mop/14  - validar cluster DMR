@@ -1,0 +1,38 @@
+
+1) Acceder a la máquina host lsclprocicmsolace01 via ssh
+	
+	ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
+    sudo su - opc
+    sudo su solace
+    docker exec -it solace_broker_bch_primary cli
+    enable
+    # show cluster * link *
+
+        Cluster Name          : CLUSTER_BCH_PRD_CROSS
+        Node Name             : prdprimary
+        Link                               Admin Oper  Fail Reason / Uptime
+        ---------------------------------- ----- ----- ----------------------------
+        #ACTIVE                            Up    Up    0d 0h 3m 13s
+        prdvalparaiso                      Up    Up    0d 0h 0m 10s
+
+    # exit
+    exit
+
+2) Acceder a la máquina host lvapprocicmsolace01 via ssh
+	
+	ssh <usuario>@sop_solaceprod@10.124.80.131@psmp.int.bch.bancodechile.cl
+    sudo su - opc
+    sudo su solace
+    docker exec -it solace_broker_bch_valparaiso cli
+    enable
+    # show cluster * link *
+
+        Cluster Name          : CLUSTER_BCH_PRD_CROSS
+        Node Name             : prdprimary
+        Link                               Admin Oper  Fail Reason / Uptime
+        ---------------------------------- ----- ----- ----------------------------
+        #ACTIVE                            Up    Up    0d 0h 3m 13s
+        prdvalparaiso                      Up    Up    0d 0h 0m 10s
+
+    # exit
+    exit

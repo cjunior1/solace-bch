@@ -1,0 +1,19 @@
+
+Testar acesso console web ui
+
+1) Acessar Solace Santiago  https://eventbroker.ociprdscl.bancodechile.cl:1943/ com usuario admin
+	
+	user: admin 
+	pass: solace123 <--- Usar a senha informada na instalação
+
+2) Verificar se a VPN VPN_BCH_PRD_CROSS foi criada
+
+#######
+
+
+3) Acessar Solace Valparaiso  https://eventbroker.ociprdvap.bancodechile.cl:1943/ com usuario admin
+	
+	user: admin [default]
+	pass: solace123 <--- Usar a senha informada na instalação
+
+4) Verificar se a VPN VPN_BCH_PRD_CROSS foi criada

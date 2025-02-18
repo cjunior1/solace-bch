@@ -1,18 +1,16 @@
 1) Acceder a la máquina host lvapprocicmsolace01 via ssh
 	
-2) Cambiar al usuário solace
+2) Cambiar al usuário solace y crear directórios
 	
 	sudo su - opc
-	sudo su solace
+	sudo solace
 
-3) Crear subdirectorios en directorio /solace
-	
 	cd /solace
 	mkdir data
 	mkdir install
 	mkdir secrets
 
-4) Baixar los archivos para la instalacíon
+3) Baixar los archivos para la instalacíon
 
 	cd /solace/install
 	wget http://solace_repo.git/prd/vap/install_vap.zip
@@ -21,13 +19,11 @@
     wget http://solace_repo.git/prd/vap/secrets.zip
 	unzip secrets.zip
 
-5) Mudar as senhas dos usuarios admin e dynatrace
+4) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]
 
 	cd solace/secrets
-	nano passwd -> alterar a senha do usuario admin
-	nano passwd-dynatrace -> alterar a senha do usuario dynatrace
-
-
+	nano passwd -> cambiar la contraseña del usuario admin
+	nano passwd-dynatrace -> cambiar la contraseña del usuario dynatrace
 
 5) Cambie el ID de usuario en el archivo .env al ID de usuario de Solace
 
@@ -46,13 +42,15 @@
 	cd /solace/install
 	docker compose -f docker-compose-valparaiso.yml up -d
 
-7) Validar el broker 
+8) Validar el broker 
 	
-	    Acceda a la consola CLI de Solace y vea el estado de los servicios
+	Acceda a la consola CLI de Solace y vea el estado de los servicios
 		docker exec -it solace_broker_prd_valparaiso cli
+		
+		Operationg Mode: Message Routing Node
 		enable
 		# show service
-			todos servicos devem estar "Enabled"
+				- los servicios deben tener el estado habilitado "Enabled"
 		# exit
 		exit
 

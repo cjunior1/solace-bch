@@ -7,7 +7,7 @@ Instalar el broker monitor
 2) Remover broker monitor
 	
 	sudo su - opc
-	sudo solace
+	sudo su solace
     docker stop solace_broker_prd_monitor
     docker rm solace_broker_prd_monitor
 	cd /solace

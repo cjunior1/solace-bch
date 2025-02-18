@@ -5,6 +5,8 @@ Instalar el broker primary
 
 1) Acceder a la máquina host lsclprocicmsolace01 via ssh
 	
+	ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
+	
 2) Cambiar al usuário solace y crear directórios
 	
 	sudo su - opc
@@ -24,7 +26,7 @@ Instalar el broker primary
     wget http://solace_repo.git/prd/secrets/secrets.zip
 	unzip secrets.zip
 
-5) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]
+4) Cambiar la contraseña de los usuarios admin y dynatrace [opcional]
 
 	cd solace/secrets
 	nano passwd -> cambiar la contraseña del usuario admin
@@ -44,14 +46,19 @@ Instalar el broker primary
 
 	cd /solace/install
 	docker compose -f docker-compose-primary.yml up -d
+	docekr ps
+		- el contenedor debe estar en status = "Up"
 
 8) Validar el broker 
 	
 	Acceda a la consola CLI de Solace y vea el estado de los servicios
 		docker exec -it solace_broker_prd_primary cli
+		
+		Operationg Mode: Message Routing Node
 		enable
 		# show service
-			- los servicios deben tener el estado habilitado "Enabled"
+				- los servicios deben tener el estado habilitado "Enabled"
+		# exit
 		exit
 			
 

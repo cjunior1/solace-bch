@@ -1,7 +1,9 @@
 
 Validar la sincronización de configuración y la redundancia (HA) - Santiago
 
-1) Acceder al host lsclprocicmsolace01
+1) Acceder al host lsclprocicmsolace01 via ssh
+
+	ssh <usuario>@sop_solaceprod@10.111.80.142@psmp.int.bch.bancodechile.cl
 
 2) Conectarse a solace cli
 
@@ -10,8 +12,68 @@ Validar la sincronización de configuración y la redundancia (HA) - Santiago
 	docker exec -it solace_broker_prd_primary cli
 	enable
 	# show redundancy group
-	# show redundancy detail
+
+		Node Router-Name   Node Type       Address           Status
+		-----------------  --------------  ----------------  ---------
+		prdbackup          Message-Router  lsclprocicmsolac  Online
+											e02               
+		prdmonitoring      Monitor         lsclprocicmsolac  Online
+											e03               
+		prdprimary*        Message-Router  lsclprocicmsolac  Online
+											e01               
+	# show redundancy
+
+		Configuration Status     : Enabled
+		Redundancy Status        : Up
+		Operating Mode           : Message Routing Node
+		Switchover Mechanism     : Hostlist
+		Auto Revert              : No
+		Redundancy Mode          : Active/Standby
+		Active-Standby Role      : Primary
+		Mate Router Name         : prdbackup
+		ADB Link To Mate         : Up
+		ADB Hello To Mate        : Up
+
+		Interface        Static Address           Status
+		---------------- ------------------------ ------
+		intf0            172.18.0.2               Up
+
+									Primary Virtual Router  Backup Virtual Router
+									----------------------  ----------------------
+		Activity Status                Mate Active             Shutdown
+		Redundancy Interface Status    Up                      
+		VRRP Status                                            
+		intf0                        Initialize              
+		VRRP Priority                  150                     
+		Message Spool Status           AD-Standby              
+		Priority Reported By Mate      Active                  
+
 	# show config-sync
+
+		Admin Status                      : Enabled
+		Oper Status                       : Up
+		SSL Enabled                       : No
+		Authentication                    
+		Client Certificate              
+			Maximum Chain Depth           : 3
+			Validate Certificate Dates    : Enabled
+			Server Certificate Configured : Yes
+		Client-Profile                    
+		TCP                             
+			MSS                           : 1460
+			Initial Window                : 2
+			Maximum Window                : 256   KB
+			Keepalive                     
+			Count                       : 5
+			Idle                        : 3     seconds
+			Interval                    : 1     seconds
+		Client                            
+		Name                            : #config-sync/prdprimary
+		Connection State                : Connected
+		Last Fail Reason                : 
+		Synchronize                       
+		Username                        : Yes
+
 	# exit
 	exit
 
@@ -21,6 +83,8 @@ Validar la sincronización de configuración y la redundancia (HA) - broker back
 
 3) Acceder al host lsclprocicmsolace02 via ssh
 
+	ssh <usuario>@sop_solaceprod@10.111.80.163@psmp.int.bch.bancodechile.cl
+
 4) Conectarse a solace cli
 
 	sudo su - opc
@@ -28,16 +92,80 @@ Validar la sincronización de configuración y la redundancia (HA) - broker back
 	docker exec -it solace_broker_prd_backup cli
 	enable
 	# show redundancy group
-		todos devem estar "On-line"
-	# show redundancy detail
+
+		Node Router-Name   Node Type       Address           Status
+		-----------------  --------------  ----------------  ---------
+		prdbackup*         Message-Router  lsclprocicmsolac  Online
+											e02               
+		prdmonitoring      Monitor         lsclprocicmsolac  Online
+											e03               
+		prdprimary         Message-Router  lsclprocicmsolac  Online
+											e01               
+
+	# show redundancy 
+
+		Configuration Status     : Enabled
+		Redundancy Status        : Up
+		Operating Mode           : Message Routing Node
+		Switchover Mechanism     : Hostlist
+		Auto Revert              : No
+		Redundancy Mode          : Active/Standby
+		Active-Standby Role      : Backup
+		Mate Router Name         : prdprimary
+		ADB Link To Mate         : Up
+		ADB Hello To Mate        : Up
+
+		Interface        Static Address           Status
+		---------------- ------------------------ ------
+		intf0            172.18.0.2               Up
+
+									Primary Virtual Router  Backup Virtual Router
+									----------------------  ----------------------
+		Activity Status                Shutdown                Local Active
+		Redundancy Interface Status                            Up
+		VRRP Status                                            
+		intf0                                                Initialize
+		VRRP Priority                                          240
+		Message Spool Status                                   AD-Active
+		Priority Reported By Mate                              Standby
+
 	# show config-sync
+
+		Admin Status                      : Enabled
+		Oper Status                       : Up
+		SSL Enabled                       : No
+		Authentication                    
+		Client Certificate              
+			Maximum Chain Depth           : 3
+			Validate Certificate Dates    : Enabled
+			Server Certificate Configured : Yes
+		Client-Profile                    
+		TCP                             
+			MSS                           : 1460
+			Initial Window                : 2
+			Maximum Window                : 256   KB
+			Keepalive                     
+			Count                       : 5
+			Idle                        : 3     seconds
+			Interval                    : 1     seconds
+		Client                            
+		Name                            : #config-sync/prdbackup
+		Connection State                : Connected
+		Last Fail Reason                : 
+		Synchronize                       
+		Username                        : Yes
+
 	# exit
 	exit
 
 ########
+
+
 Validar la sincronización de configuración y la redundancia (HA) - broker monitor
 
-5) Acceder al host  lsclprocicmsolace03
+5) Acceder al host  lsclprocicmsolace03 via ssh
+
+	ssh <usuario>@sop_solaceprod@10.111.80.169@psmp.int.bch.bancodechile.cl
 
 6) Conectarse a solace cli
 
@@ -45,7 +173,33 @@ Validar la sincronización de configuración y la redundancia (HA) - broker moni
 	sudo su solace
 	docker exec -it solace_broker_prd_monitor cli
 	enable
-	# show redundancy group
+	# show redundancy
+
+		Configuration Status     : Enabled
+		Redundancy Status        : Up
+		Operating Mode           : Monitoring Node
+		Switchover Mechanism     : Hostlist
+		Auto Revert              : No
+		Redundancy Mode          : Active/Standby
+		Active-Standby Role      : None
+		Mate Router Name         : 
+		ADB Link To Mate         : Down
+		ADB Hello To Mate        : Down
+
+		Interface        Static Address           Status
+		---------------- ------------------------ ------
+		intf0            172.18.0.2               Up
+
+									Primary Virtual Router  Backup Virtual Router
+									----------------------  ----------------------
+		Activity Status                Shutdown                Shutdown
+		Redundancy Interface Status                            
+		VRRP Status                                            
+		intf0                                                
+		VRRP Priority                                          
+		Message Spool Status                                   
+		Priority Reported By Mate                              
+
 	# exit
 	exit
 
