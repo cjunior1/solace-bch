@@ -1,12 +1,12 @@
 Instalacíon en Santiago
 
-Instalar el broker backup
+Remover el broker backup
 
 1) Acceder a la máquina host lsclprocicmsolace02 via ssh
 
 	ssh <usuario>@sop_solaceprod@10.111.80.163@psmp.int.bch.bancodechile.cl
 	
-2) Remover broker primary
+2) Remover broker backup
 	
 	sudo su - opc
 	sudo su solace

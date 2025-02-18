@@ -1,6 +1,6 @@
 Instalacíon en Santiago
 
-Instalar el broker monitor
+Remover el broker monitor
 
 1) Acceder a la máquina host lsclprocicmsolace03 via ssh
 

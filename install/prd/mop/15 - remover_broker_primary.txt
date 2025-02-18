@@ -1,6 +1,6 @@
 Instalacíon en Santiago
 
-Instalar el broker primary
+Remover el broker primary
 
 1) Acceder a la máquina host lsclprocicmsolace01 via ssh
 	
