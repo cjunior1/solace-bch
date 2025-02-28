@@ -37,7 +37,6 @@
         - routername=${ROUTER_NAME}
         - TZ=America/Santiago
         - tls_servercertificate_filepath=${CERTIFICATE}
-        - productkey=${PRODUCT_KEY}        
       volumes:
         - /solace/data:/var/lib/solace:Z
         - /solace/secrets:/run/secrets
